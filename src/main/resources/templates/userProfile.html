@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>User Profile</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Your Profile</h1>
+<p><strong>ID:</strong> <span th:text="${user.id}">1</span></p>
+<p><strong>Username:</strong> <span th:text="${user.username}">Username</span></p>
+<p><strong>Email:</strong> <span th:text="${user.email}">email@example.com</span></p>
+<p><strong>Is Admin:</strong> <span th:text="${user.admin}">false</span></p>
+<a href="/logout">Logout</a>
+</body>
+</html>
