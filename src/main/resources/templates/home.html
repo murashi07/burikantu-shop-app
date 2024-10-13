@@ -12,84 +12,92 @@
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            padding-top: 70px; /* To prevent navbar overlap */
+            font-family: 'Georgia', serif;
+            padding-top: 70px;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            background-color: #F5F5F5;
         }
         .navbar {
-            background-color: #D5DEEF;
+            background-color: #2C3E50;
         }
         .navbar-brand img {
             height: 60px;
         }
         .hero {
             padding: 60px 0;
-            background-color: #f8f9fa;
+            background-color: #EAECEE;
             text-align: center;
+            background-image: url('https://example.com/hotel-background.jpg');
+            background-size: cover;
+            background-position: center;
         }
         .hero h1 {
-            font-size: 3em;
-            color: #007bff;
+            font-size: 3.5em;
+            color: #F39C12;
+            text-shadow: 2px 2px #34495E;
         }
         .hero p {
-            font-size: 1.2em;
-            color: #6c757d;
+            font-size: 1.5em;
+            color: #FFFFFF;
             margin: 20px 0;
+            text-shadow: 1px 1px #34495E;
         }
         .hero .btn {
-            background-color: #007bff;
+            background-color: #F39C12;
             color: #fff;
-            font-size: 1em;
-            padding: 10px 20px;
+            font-size: 1.2em;
+            padding: 10px 30px;
             border: none;
         }
         .hero .btn:hover {
-            background-color: #0056b3;
+            background-color: #D35400;
             color: #fff;
             text-decoration: none;
         }
         .nav-link {
-            color: #003554;
+            color: #ECF0F1;
             font-weight: bold;
+            font-size: 1.1em;
         }
         .nav-link:hover {
-            color: #006DA4;
+            color: #F39C12;
         }
         .content-wrapper {
             flex: 1;
             padding: 60px 0;
         }
-        .products {
+        .rooms {
             padding: 60px 0;
         }
-        .product-card {
+        .room-card {
             margin-bottom: 30px;
         }
         .footer {
-            background-color: #D5DEEF;
+            background-color: #2C3E50;
             padding: 20px 0;
             text-align: center;
+            color: #ECF0F1;
         }
         .footer a {
-            color: #003554;
+            color: #F39C12;
             margin: 0 10px;
             font-size: 1.5em;
             transition: color 0.3s;
         }
         .footer a:hover {
-            color: #007bff;
+            color: #D35400;
             text-decoration: none;
         }
     </style>
-    <title>Online Shopping</title>
+    <title>Luxury Hotel Management</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <img th:src="@{/images/logo2.jpg}" src="../static/images/logo2.jpg" alt="Logo"/>
+            <img th:src="@{/images/hotel-logo.png}" src="../static/images/hotel-logo.png" alt="Hotel Logo"/>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -102,9 +110,8 @@
                     <a class="nav-link" th:href="@{/}" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/#}" href="#">About Us</a>
+                    <a class="nav-link" th:href="@{/#about}" href="#">About Us</a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/login}" href="#">Login</a>
                 </li>
@@ -119,51 +126,51 @@
 <!-- Hero Section -->
 <section class="hero">
     <div class="container">
-        <h1>Welcome to Our Online Store</h1>
-        <p>Discover the best products at unbeatable prices.</p>
-        <a href="#products" class="btn">Shop Now</a>
+        <h1>Welcome to Our Luxury Hotel</h1>
+        <p>Experience elegance, comfort, and world-class services.</p>
+        <a href="#rooms" class="btn">View Rooms</a>
     </div>
 </section>
 
-<!-- Products Section -->
-<section class="products" id="products">
+<!-- Rooms Section -->
+<section class="rooms" id="rooms">
     <div class="container">
-        <h2 class="text-center mb-5">Our Products</h2>
+        <h2 class="text-center mb-5">Our Rooms</h2>
         <div class="row">
-            <!-- Product 1 -->
-            <div class="col-md-4 product-card">
+            <!-- Room 1 -->
+            <div class="col-md-4 room-card">
                 <div class="card">
-                    <img class="d-block w-100" th:src="@{/imageProduct/images.jpeg}" src="../static/imageProduct/images.jpeg" alt="Fourth slide">
+                    <img class="d-block w-100" th:src="@{/roomImages/deluxe-room.jpg}" src="../static/roomImages/deluxe-room.jpg" alt="Deluxe Room">
                     <div class="card-body">
-                        <h5 class="card-title">Product One</h5>
-                        <p class="card-text">15000rwf</p>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                        <h5 class="card-title">Deluxe Room</h5>
+                        <p class="card-text">$200/night</p>
+                        <a href="#" class="btn btn-primary">Book Now</a>
                     </div>
                 </div>
             </div>
-            <!-- Product 2 -->
-            <div class="col-md-4 product-card">
+            <!-- Room 2 -->
+            <div class="col-md-4 room-card">
                 <div class="card">
-                    <img class="d-block w-100" th:src="@{/imageProduct/download (10).jpeg}" src="../static/imageProduct/download (10).jpeg" alt="Product 2">
+                    <img class="d-block w-100" th:src="@{/roomImages/suite.jpg}" src="../static/roomImages/suite.jpg" alt="Suite">
                     <div class="card-body">
-                        <h5 class="card-title">Product Two</h5>
-                        <p class="card-text">20000rwf</p>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                        <h5 class="card-title">Suite</h5>
+                        <p class="card-text">$350/night</p>
+                        <a href="#" class="btn btn-primary">Book Now</a>
                     </div>
                 </div>
             </div>
-            <!-- Product 3 -->
-            <div class="col-md-4 product-card">
+            <!-- Room 3 -->
+            <div class="col-md-4 room-card">
                 <div class="card">
-                    <img class="d-block w-100" th:src="@{/imageProduct/download.jpeg}" src="../static/imageProduct/download.jpeg" alt="Third slide">
+                    <img class="d-block w-100" th:src="@{/roomImages/presidential-suite.jpg}" src="../static/roomImages/presidential-suite.jpg" alt="Presidential Suite">
                     <div class="card-body">
-                        <h5 class="card-title">Product Three</h5>
-                        <p class="card-text">50000rwf</p>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                        <h5 class="card-title">Presidential Suite</h5>
+                        <p class="card-text">$800/night</p>
+                        <a href="#" class="btn btn-primary">Book Now</a>
                     </div>
                 </div>
             </div>
-            <!-- Add more products as needed -->
+            <!-- Add more rooms as needed -->
         </div>
     </div>
 </section>
@@ -177,7 +184,7 @@
         <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
             <i class="fab fa-facebook-f"></i>
         </a>
-        <p class="mt-3">&copy; 2024 Your Online Store. All rights reserved.</p>
+        <p class="mt-3">&copy; 2024 Luxury Hotel Management. All rights reserved.</p>
     </div>
 </footer>
 

@@ -61,16 +61,45 @@ public class UserController {
     }
 
     // Display user profile
-    @GetMapping("/profile")
-    public String showUserProfile(HttpServletRequest request, Model model) {
+//    @GetMapping("/profile")
+//    public String showUserProfile(HttpServletRequest request, Model model) {
+//        HttpSession session = request.getSession();
+//        if (session.getAttribute("user") != null) {
+//            User user = (User) session.getAttribute("user");
+//            model.addAttribute("user", user);
+//            return "userProfile"; // Thymeleaf template for user profile
+//        } else {
+//            return "redirect:/login";
+//        }
+//    }
+
+    // Display user profile with the ability to update
+    @GetMapping("/profile/{id}")
+    public String showUserProfile(@PathVariable Long id, HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-        if (session.getAttribute("user") != null) {
-            User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
+
+        if (user != null && user.getId().equals(id)) {
             model.addAttribute("user", user);
             return "userProfile"; // Thymeleaf template for user profile
         } else {
             return "redirect:/login";
         }
     }
+
+    // Update user profile
+    @PutMapping("/profile/{id}")
+    public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User updatedUser, HttpSession session) {
+        User currentUser = (User) session.getAttribute("user");
+
+        if (currentUser != null && currentUser.getId().equals(id)) {
+            userService.updateUser(id, updatedUser); // Update the user
+            session.setAttribute("user", updatedUser); // Update session with new user details
+            return "redirect:/api/user/profile/" + id; // Redirect to updated profile
+        } else {
+            return "redirect:/login";
+        }
+    }
+
 }
 

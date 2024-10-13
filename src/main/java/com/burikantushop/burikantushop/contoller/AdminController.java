@@ -73,25 +73,35 @@ public class AdminController {
 
     // Handle update user
     @PostMapping("/update/{id}")
-    public String updateUser(@PathVariable("id") Long id, @ModelAttribute("user") User user, Model model) {
+    public String updateUser(@PathVariable("id") Long id, @Valid @ModelAttribute("user") User user,
+                             BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("user", user);
+            return "edit_user"; // Return to form if validation errors occur
+        }
+
         try {
             userService.updateUser(id, user);
-            return "redirect:/admin?success";
+            return "redirect:/admin?success"; // Redirect on success
         } catch (Exception e) {
             model.addAttribute("error", "Error updating user.");
-            return "redirect:/admin?error";
+            return "edit_user"; // Return to form if exception occurs
         }
     }
 
-    // Handle delete user
     @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
+    public String deleteUser(@PathVariable("id") Long id, HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         if (session.getAttribute("user") != null) {
             User currentUser = (User) session.getAttribute("user");
             if (currentUser.isAdmin()) {
-                userService.deleteUser(id);
-                return "redirect:/admin?deleted";
+                try {
+                    userService.deleteUser(id);
+                    return "redirect:/admin?deleted";
+                } catch (Exception e) {
+                    model.addAttribute("error", "Error deleting user.");
+                    return "admin";
+                }
             } else {
                 model.addAttribute("error", "Access denied.");
                 return "redirect:/";
@@ -100,5 +110,6 @@ public class AdminController {
             return "redirect:/login";
         }
     }
+
 
 }

@@ -39,18 +39,18 @@ public class UserService implements IUserService {
         return userRepository.findByEmail(email);
     }
 
-    @Override
-    public User updateUser(Long id, User user) {
-        User existingUser = userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
-
-        existingUser.setUsername(user.getUsername());
-        existingUser.setEmail(user.getEmail());
-        existingUser.setPassword(user.getPassword());
-        existingUser.setIsAdmin(user.isAdmin());
-
-        return userRepository.save(existingUser);
-    }
+//    @Override
+//    public User updateUser(Long id, User user) {
+//        User existingUser = userRepository.findById(id)
+//                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+//
+//        existingUser.setUsername(user.getUsername());
+//        existingUser.setEmail(user.getEmail());
+//        existingUser.setPassword(user.getPassword());
+//        existingUser.setIsAdmin(user.isAdmin());
+//
+//        return userRepository.save(existingUser);
+//    }
 
     @Override
     public void deleteUser(Long id) {
@@ -64,5 +64,20 @@ public class UserService implements IUserService {
         }
         return null;
     }
+
+    @Override
+    public User updateUser(Long id, User updatedUser) {
+        Optional<User> existingUserOpt = userRepository.findById(id);
+
+        if (existingUserOpt.isPresent()) {
+            User existingUser = existingUserOpt.get();
+            existingUser.setUsername(updatedUser.getUsername());
+            existingUser.setEmail(updatedUser.getEmail());
+            // Update other fields as needed
+            return userRepository.save(existingUser); // Save the updated user
+        }
+        return null;
+    }
+
 }
 

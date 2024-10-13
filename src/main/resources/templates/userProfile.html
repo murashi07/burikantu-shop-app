@@ -6,10 +6,19 @@
 </head>
 <body>
 <h1>Your Profile</h1>
-<p><strong>ID:</strong> <span th:text="${user.id}">1</span></p>
-<p><strong>Username:</strong> <span th:text="${user.username}">Username</span></p>
-<p><strong>Email:</strong> <span th:text="${user.email}">email@example.com</span></p>
-<p><strong>Is Admin:</strong> <span th:text="${user.admin}">false</span></p>
+
+<form th:action="@{/api/user/profile/{id}(id=${user.id})}" method="post">
+  <p><strong>ID:</strong> <span th:text="${user.id}">1</span></p>
+
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username" th:field="username" />
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" th:field="email" />
+
+  <button type="submit">Update Profile</button>
+</form>
+
 <a href="/logout">Logout</a>
 </body>
 </html>

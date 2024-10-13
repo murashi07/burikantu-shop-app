@@ -1,32 +1,71 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Edit User</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- Bootstrap CSS via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts for better typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .edit-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .back-btn {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-<h1>Edit User</h1>
-<form th:action="@{'/admin/update/' + ${user.id}}" th:object="${user}" method="post">
-    <div>
-        <label>Username:</label>
-        <input type="text" th:field="*{username}" required />
+<div class="container edit-container">
+    <h2 class="mb-4">Edit User</h2>
+
+    <!-- Display Validation Errors -->
+    <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
+        Please correct the errors in the form.
     </div>
-    <div>
-        <label>Email:</label>
-        <input type="email" th:field="*{email}" required />
-    </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" th:field="*{password}" required />
-    </div>
-    <div>
-        <label>Is Admin:</label>
-        <input type="checkbox" th:field="*{admin}" />
-    </div>
-    <div>
-        <button type="submit">Update</button>
-        <a href="/admin">Cancel</a>
-    </div>
-</form>
+
+    <form th:action="@{'/update/' + ${user.id}}" th:object="${user}" method="post">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" th:field="*{username}" class="form-control" id="username" placeholder="Enter username">
+            <div th:if="${#fields.hasErrors('username')}" class="text-danger">
+                <p th:errors="*{username}">Invalid username</p>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Enter email">
+            <div th:if="${#fields.hasErrors('email')}" class="text-danger">
+                <p th:errors="*{email}">Invalid email</p>
+            </div>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" th:field="*{admin}" class="form-check-input" id="admin">
+            <label class="form-check-label" for="admin">Is Admin</label>
+        </div>
+
+        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Save Changes</button>
+        <a href="/dashboard" class="btn btn-secondary back-btn"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+    </form>
+</div>
+
+<!-- Bootstrap JS and dependencies via CDN -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Font Awesome JS via CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 </body>
 </html>
